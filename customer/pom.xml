@@ -6,7 +6,7 @@
     <groupId>rain.mocking.tea-customer</groupId>
     <artifactId>customer</artifactId>
     <name>customer</name>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <description>客户主体</description>
 
     <properties>
@@ -22,7 +22,7 @@
         <dependency>
             <groupId>rain.mocking.tea-starter</groupId>
             <artifactId>tea-spring-boot-starter</artifactId>
-            <version>1.1.0-SNAPSHOT</version>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 
