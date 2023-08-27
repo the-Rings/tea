@@ -17,19 +17,19 @@ import java.util.List;
 @Entity
 @Table(name = "t_tea_maker")
 public class TeaMaker {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @OneToMany(mappedBy = "maker")
-    @OrderBy("id desc")
-    private List<Order> orders = new ArrayList<>();
+  private String name;
 
-    @Column(updatable = false)
-    @CreationTimestamp
-    private Date createTime;
+  @OneToMany(mappedBy = "maker")
+  @OrderBy("id desc")
+  private List<Order> orders = new ArrayList<>();
 
-    @UpdateTimestamp
-    private Date updateTime;
+  @Column(updatable = false)
+  @CreationTimestamp
+  private Date createTime;
+
+  @UpdateTimestamp private Date updateTime;
 }

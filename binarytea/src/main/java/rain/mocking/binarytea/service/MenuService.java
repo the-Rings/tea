@@ -22,7 +22,7 @@ public class MenuService {
   private final MenuRepository menuRepository;
 
   public Optional<MenuItem> save(MenuItem menuItem) {
-    return Optional.ofNullable(menuRepository.save(menuItem));
+    return Optional.of(menuRepository.save(menuItem));
   }
 
   public List<MenuItem> save(List<MenuItem> items) {

@@ -16,31 +16,29 @@ import java.util.List;
 @Entity
 @Table(name = "t_order")
 public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "maker_id")
-    private TeaMaker maker;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "maker_id")
+  private TeaMaker maker;
 
-    @ManyToMany
-    @JoinTable(name = "t_order_item",
-            joinColumns = @JoinColumn(name = "item_id"),
-            inverseJoinColumns = @JoinColumn(name = "order_id"))
-    @OrderBy
-    private List<MenuItem> items;
+  @ManyToMany
+  @JoinTable(
+      name = "t_order_item",
+      joinColumns = @JoinColumn(name = "item_id"),
+      inverseJoinColumns = @JoinColumn(name = "order_id"))
+  @OrderBy
+  private List<MenuItem> items;
 
-    @Embedded
-    private Amount amount;
+  @Embedded private Amount amount;
 
-    @Enumerated
-    private OrderStatus status;
+  @Enumerated private OrderStatus status;
 
-    @Column(updatable = false)
-    @CreationTimestamp
-    private Date createTime;
+  @Column(updatable = false)
+  @CreationTimestamp
+  private Date createTime;
 
-    @UpdateTimestamp
-    private Date updateTime;
+  @UpdateTimestamp private Date updateTime;
 }

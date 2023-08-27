@@ -4,7 +4,11 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
+
+import java.time.Duration;
 
 /**
  * @author mao
@@ -25,5 +29,13 @@ public class CustomerApplication {
   @Bean
   public ExitCodeGenerator waitExitConeGenerator(ApplicationArguments args) {
     return () -> (args.containsOption("wait") ? 0 : 1);
+  }
+
+  @Bean
+  public RestTemplate restTemplate(RestTemplateBuilder builder) {
+    return builder
+        .setConnectTimeout(Duration.ofSeconds(1)) // 连接超时
+        .setReadTimeout(Duration.ofSeconds(5)) // 读取超时
+        .build();
   }
 }

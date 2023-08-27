@@ -11,9 +11,9 @@ import java.util.List;
 @Getter
 @Setter
 public class NewOrderForm {
-    @NotEmpty
-    private List<String> itemIdList;
-    @Min(50)
-    @Max(100)
-    private int discount;
+  @NotEmpty private List<String> itemIdList;
+
+  @Min(50)
+  @Max(100)
+  private int discount;
 }
