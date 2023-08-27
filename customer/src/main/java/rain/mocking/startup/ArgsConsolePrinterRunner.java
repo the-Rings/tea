@@ -1,4 +1,4 @@
-package rain.mocking.tea.startup;
+package rain.mocking.startup;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;

@@ -1,7 +1,6 @@
-package rain.mocking.tea.repository;
+package rain.mocking.repository;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -11,7 +10,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import rain.mocking.tea.domain.MenuItem;
+import rain.mocking.domain.MenuItem;
 
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;

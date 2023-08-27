@@ -3,11 +3,11 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>rain.mocking.tea-customer</groupId>
-    <artifactId>customer</artifactId>
-    <name>customer</name>
+    <groupId>rain.mocking.tea-transaction-propagation</groupId>
+    <artifactId>tea-transaction-propagation</artifactId>
+    <name>tea-transaction-propagation</name>
     <version>1.1.0-SNAPSHOT</version>
-    <description>客户主体</description>
+    <description>学习事务传播机制</description>
 
     <properties>
         <java.version>17</java.version>
@@ -20,14 +20,23 @@
 
     <dependencies>
         <dependency>
-            <groupId>rain.mocking.tea-starter</groupId>
-            <artifactId>tea-spring-boot-starter</artifactId>
-            <version>1.1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <!-- JDBC -->
+        <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
 
@@ -83,7 +92,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.7.6</version>
                 <configuration>
-                    <mainClass>rain.mocking.CustomerApplication</mainClass>
+                    <mainClass>rain.mocking.customer.TransactionPropagationApplication</mainClass>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>

@@ -1,4 +1,4 @@
-package rain.mocking.tea;
+package rain.mocking;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -18,12 +18,12 @@ import java.sql.Connection;
 @Order(1)
 @ConfigurationPropertiesScan
 @SpringBootApplication
-public class TeaApplication implements ApplicationRunner, ApplicationContextAware {
+public class TransactionPropagationApplication implements ApplicationRunner, ApplicationContextAware {
   @Setter
   private ApplicationContext applicationContext;
 
   public static void main(String... args) {
-    SpringApplication.run(TeaApplication.class, args);
+    SpringApplication.run(TransactionPropagationApplication.class, args);
   }
 
   @Override

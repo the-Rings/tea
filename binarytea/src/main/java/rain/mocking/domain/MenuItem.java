@@ -1,4 +1,4 @@
-package rain.mocking.tea.domain;
+package rain.mocking.domain;
 
 import lombok.Builder;
 import lombok.Getter;
