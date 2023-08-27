@@ -40,23 +40,3 @@ create table t_tea_maker (
     update_time timestamp,
     primary key (id)
 );
-
-create table users(
-    username varchar(50) not null primary key,
-    password varchar(500) not null,
-    enabled boolean not null
-);
-
-create table authorities (
-    username varchar(50) not null,
-    authority varchar(50) not null
-);
-
-create unique index ix_auth_username on authorities (username, authority);
-
-create table persistent_logins (
-    username varchar(64) not null,
-    series varchar(64) primary key,
-    token varchar(64) not null,
-    last_used timestamp not null
-);
