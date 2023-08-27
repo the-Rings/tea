@@ -1,4 +1,4 @@
-package rain.mocking.domain;
+package rain.mocking.transaction.domain;
 
 import lombok.Builder;
 import lombok.Getter;
