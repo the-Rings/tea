@@ -5,11 +5,13 @@ import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author mao
  * @date 2023/8/26
  */
+@EnableTransactionManagement
 @SpringBootApplication
 public class CustomerApplication {
   public static void main(String[] args) {

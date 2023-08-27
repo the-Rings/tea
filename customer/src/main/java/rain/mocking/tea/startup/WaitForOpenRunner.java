@@ -25,6 +25,8 @@ public class WaitForOpenRunner implements ApplicationRunner, ApplicationContextA
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
+    log.info("这里演示了@order用法，如果有多个类实现了ApplicationRunner，那么它们就是同一种类型，Order在这个小范围内按照顺序执行");
+    log.info("执行ApplicationRunner order=2");
     boolean needWait = args.containsOption("wait");
     if (!needWait) {
       log.info("如果没开门，就不用等了。");

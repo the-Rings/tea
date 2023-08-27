@@ -16,7 +16,8 @@ import org.springframework.util.StringUtils;
 public class ArgsConsolePrinterRunner implements CommandLineRunner {
 
   @Override
-  public void run(String... args) throws Exception {
+  public void run(String... args) {
+    log.info("执行ApplicationRunner order=1");
     log.info("Spring容器启动后立即执行以下逻辑，order=1，打印命令行参数功能");
     log.info("传入了{}个参数，分别是: {}", args.length, StringUtils.arrayToCommaDelimitedString(args));
   }
