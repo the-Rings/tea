@@ -30,4 +30,10 @@ public class OrderService {
         Order.builder().amount(amount).status(OrderStatus.ORDERED).items(itemList).build();
     return orderRepository.save(order);
   }
+
+  public int modifyOrdersState(List<Long> idList, OrderStatus oldState, OrderStatus newState) {
+    List<Order> orders = orderRepository.findByStatusEqualsAndIdInOrderById(oldState, idList);
+    orders.forEach(o -> o.setStatus(newState));
+    return orderRepository.saveAll(orders).size();
+  }
 }

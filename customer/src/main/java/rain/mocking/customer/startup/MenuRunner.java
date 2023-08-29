@@ -50,7 +50,8 @@ public class MenuRunner implements ApplicationRunner {
 
   private void getAllMenu() {
     ParameterizedTypeReference<List<MenuItem>> typeReference =
-        new ParameterizedTypeReference<List<MenuItem>>() {};
+            new ParameterizedTypeReference<>() {
+            };
     URI uri = UriComponentsBuilder.fromUriString(binarytea + "/menu").build().toUri();
     RequestEntity<Void> request = RequestEntity.get(uri).accept(MediaType.APPLICATION_JSON).build();
     ResponseEntity<List<MenuItem>> response = restTemplate.exchange(request, typeReference);
