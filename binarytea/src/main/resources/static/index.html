@@ -3,14 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>二进制奶茶</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <h1>欢迎来到二进制</h1>
-    <p>
-        你可以选择：
-        <ul>
-            <li><a href="/order">下单</a></li>
-        </ul>
-    </p>
+    <div class="container">
+        <h1>Welcome to Binary Tea</h1>
+        <p>Enjoy the best milk tea in town!</p>
+        <button class="btn">Order Now</button>
+    </div>
+    <script>
+        let btn = document.querySelector('.btn');
+        btn.addEventListener('click', function() {
+            window.location.href = "/order";
+        });
+    </script>
 </body>
 </html>

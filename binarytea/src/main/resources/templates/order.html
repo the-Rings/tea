@@ -1,62 +1,123 @@
 <!DOCTYPE html>
 <html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <title>二进制奶茶</title>
-    </head>
-    <body>
-        <h1>二进制奶茶</h1>
-        <h2>下单</h2>
-        <div>
-            <form action="#" th:action="@{/order}" th:object="${newOrderForm}" method="post">
-                <p>
-                    <label>折扣</label>
-                    <input type="number" th:field="*{discount}" th:value="*{discount}" />
-                </p>
-                <p>
-                <p th:if="${#fields.hasErrors('discount')}" th:errors="*{discount}" style="color:red">折扣错误</p>
-                <label>饮料</label>
-                <ul>
-                        <li th:each="item : ${items}">
-                            <input type="checkbox" th:field="*{itemIdList}" th:value="${item.id}" />
-                            <label th:text="${item.name}">Java咖啡</label>
-                            <label th:text="${item.size}">MEDIUM</label>
-                            <label th:text="${item.price}">CNY 12.00</label>
-                        </li>
-                    </ul>
-                </p>
-                <p th:if="${#fields.hasErrors('itemIdList')}" th:errors="*{itemIdList}" style="color:red">点单错误</p>
-                <p>
-                    <input type="submit" value="提交"/>
-                </p>
-            </form>
-        </div>
-        <h2>订单</h2>
-        <div>
-            <table border="1px">
-                <thead>
-                    <tr>
-                        <th>订单编号</th>
-                        <th>总价</th>
-                        <th>实付</th>
-                        <th>状态</th>
-                        <th>内容</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="order : ${orders}">
-                        <td th:text="${order.id}">1</td>
-                        <td th:text="${order.amount.totalAmount}">CNY 12.0</td>
-                        <td th:text="${order.amount.payAmount}">CNY 12.0</td>
-                        <td th:text="${order.status}">ORDERED</td>
-                        <td>
-                            <div th:each="item : ${order.items}">
-                                <label th:text="${item.name}">Java咖啡</label>-<label th:text="${item.size}">MEDIUM</label><br/>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>二进制奶茶</title>
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+            margin: 20px 0;
+        }
+
+        form {
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        input[type="number"], input[type="submit"] {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .success-message {
+            text-align: center;
+            color: green;
+            margin-bottom: 20px;
+        }
+
+        .error-message {
+            text-align: center;
+            color: red;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>二进制奶茶</h1>
+<h2>下单</h2>
+<div>
+    <form action="#" th:action="@{/order}" th:object="${newOrderForm}" method="post">
+        <p>
+            <span>折扣</span>
+            <input type="number" th:field="*{discount}" th:value="*{discount}"/>
+        </p>
+        <p th:if="${#fields.hasErrors('discount')}" class="error-message" th:errors="*{discount}">折扣错误</p>
+        <ul>
+            <li th:each="item : ${items}">
+                <input type="checkbox" th:field="*{itemIdList}" th:value="${item.id}"/>
+                <span th:text="${item.name}">Java咖啡</span>
+                <span th:text="${item.size}">MEDIU</span>
+                <span th:text="${item.price}">CNY 12.00</span>
+            </li>
+        </ul>
+        <p th:if="${#fields.hasErrors('itemIdList')}" class="error-message" th:errors="*{itemIdList}">点单错误</p>
+        <p>
+            <input type="submit" value="提交"/>
+        </p>
+    </form>
+</div>
+<h2>订单</h2>
+<div>
+    <form action="#" th:action="@{/order}" method="post">
+        <p th:if="${success_count != null}" class="success-message">更新了<span th:text="${success_count}">N</span>条记录
+        </p>
+        <table>
+            <thead>
+            <tr>
+                <th>选择</th>
+                <th>订单编号</th>
+                <th>总价</th>
+                <th>实付</th>
+                <th>状态</th>
+                <th>内容</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${orders}">
+                <td><input name="id" type="checkbox" th:value="${order.id}" value="1"/></td>
+                <td th:text="${order.id}">1</td>
+                <td th:text="${order.amount.totalAmount}">CNY 12.0</td>
+                <td th:text="${order.amount.payAmount}">CNY 12.0</td>
+                <td th:text="${order.status}">ORDERED</td>
+                <td>
+                    <div th:each="item : ${order.items}">
+                        <label th:text="${item.name}">Java咖啡</label>-<label th:text="${item.size}">MEDIUM</label><br/>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <p>
+            <input type="submit" value="已付款"/>
+            <input type="hidden" name="_method" value="put"/>
+        </p>
+    </form>
+</div>
+</body>
 </html>

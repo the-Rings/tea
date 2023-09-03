@@ -15,9 +15,11 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import rain.mocking.customer.integratoin.OrderService;
 import rain.mocking.customer.model.NewOrderForm;
+import rain.mocking.customer.model.StatusForm;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Order(5)
@@ -37,14 +39,20 @@ public class OrderRunner implements ApplicationRunner {
     openfeignGetOrder();
   }
 
-  protected ResponseEntity<rain.mocking.customer.model.Order> openfeignGetOrder() {
+  protected void openfeignGetOrder() {
     List<rain.mocking.customer.model.Order> orders = orderService.listOrders();
     log.info("调用前订单的数量：{}", orders.size());
     NewOrderForm form = NewOrderForm.builder().itemIdList(List.of("2")).discount(90).build();
     ResponseEntity<rain.mocking.customer.model.Order> response = orderService.createNewOrder(form);
     log.info("HTTP Status: {}, Headers: {}", response.getStatusCode(), response.getHeaders());
     log.info("Body: {}", response.getBody());
-    return response;
+
+    log.info("支付功能：简单修改订单的状态就相当于支付成功了");
+    log.info("开始支付订单：{}", Objects.requireNonNull(response.getBody()).getId());
+    StatusForm sf = StatusForm.builder().id(response.getBody().getId()).status("PAID").build();
+    response = orderService.modifyOrderStatus(sf);
+    log.info("HTTP Status: {}, Headers: {}", response.getStatusCode(), response.getHeaders());
+    log.info("Body: {}", response.getBody());
   }
 
   /**
