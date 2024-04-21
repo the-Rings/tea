@@ -60,6 +60,12 @@
             <version>${dubbo.version}</version>
         </dependency>
 
+        <!-- OpenFeign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
         <!-- Sleuth -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
