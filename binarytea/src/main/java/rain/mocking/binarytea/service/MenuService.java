@@ -2,11 +2,10 @@ package rain.mocking.binarytea.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import rain.mocking.binarytea.model.MenuItem;
+import rain.mocking.binarytea.model.Menu;
 import rain.mocking.binarytea.model.Size;
 import rain.mocking.binarytea.repository.MenuRepository;
 
@@ -21,33 +20,28 @@ import java.util.Optional;
 public class MenuService {
   private final MenuRepository menuRepository;
 
-  public Optional<MenuItem> save(MenuItem menuItem) {
-    return Optional.of(menuRepository.save(menuItem));
+  public Optional<Menu> save(Menu menu) {
+    return Optional.of(menuRepository.save(menu));
   }
 
-  public List<MenuItem> save(List<MenuItem> items) {
+  public List<Menu> save(List<Menu> items) {
     return menuRepository.saveAll(items);
   }
 
-  @Cacheable
-  public List<MenuItem> getAllMenu() {
+  public List<Menu> getAllMenu() {
     return menuRepository.findAll();
   }
 
-  public Optional<MenuItem> getById(Long id) {
+  public Optional<Menu> getById(Long id) {
     return menuRepository.findById(id);
   }
 
-  public List<MenuItem> getByName(String name) {
-    return menuRepository.findAll(Example.of(MenuItem.builder().name(name).build()), Sort.by("id"));
+  public List<Menu> getByName(String name) {
+    return menuRepository.findAll(Example.of(Menu.builder().name(name).build()), Sort.by("id"));
   }
 
-  public List<MenuItem> getByIdList(List<Long> idList) {
+  public List<Menu> getByIdList(List<Long> idList) {
     return menuRepository.findAllById(idList);
   }
 
-  @Cacheable(key = "#root.methodName + '-' + #name + '-' + #size")
-  public Optional<MenuItem> getByNameAndSize(String name, Size size) {
-    return menuRepository.findByNameAndSize(name, size);
-  }
 }

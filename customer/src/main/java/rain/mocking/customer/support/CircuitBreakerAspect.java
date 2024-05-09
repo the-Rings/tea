@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Aspect
 @Slf4j
 @Order(1)
-@Component
+// @Component
 public class CircuitBreakerAspect {
   private static final Integer THRESHOLD = 3;
   private final Map<String, AtomicInteger> errorCounter = new ConcurrentHashMap<>();

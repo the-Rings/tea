@@ -22,15 +22,12 @@ import java.util.List;
  * @date 2023/8/26
  */
 @Component
-@Order(2)
+@Order(1)
 @Slf4j
 @RequiredArgsConstructor
 public class WaitForOpenRunner implements ApplicationRunner, ApplicationContextAware {
   private final RestTemplate restTemplate;
   @Setter private ApplicationContext applicationContext;
-
-  @Value("${binarytea.url}")
-  private String binarytea;
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
@@ -63,6 +60,7 @@ public class WaitForOpenRunner implements ApplicationRunner, ApplicationContextA
   }
 
   private boolean isOpen() {
+    String binarytea = "http://127.0.0.1:8080";
     ResponseEntity<String> entity = null;
     try {
       entity = restTemplate.getForEntity(binarytea + "/menu", String.class);

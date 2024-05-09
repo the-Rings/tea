@@ -23,25 +23,17 @@ public class Order implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "maker_id")
-  private TeaMaker maker;
-
   @ManyToMany
   @JoinTable(
       name = "t_order_item",
-      joinColumns = @JoinColumn(name = "item_id"),
-      inverseJoinColumns = @JoinColumn(name = "order_id"))
+      joinColumns = @JoinColumn(name = "order_id"),
+      inverseJoinColumns = @JoinColumn(name = "item_id"))
   @OrderBy
-  private List<MenuItem> items;
+  private List<Menu> items;
+
+  private Long makerId;
 
   @Embedded private Amount amount;
 
   @Enumerated private OrderStatus status;
-
-  @Column(updatable = false)
-  @CreationTimestamp
-  private Date createTime;
-
-  @UpdateTimestamp private Date updateTime;
 }

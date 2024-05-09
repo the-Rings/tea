@@ -10,11 +10,10 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class Order {
+public class OrderVo {
     private Long id;
-    private TeaMaker maker;
     private Amount amount;
-    private List<MenuItem> items;
+    private List<MenuVo> items;
     private String status;
     private Date createTime;
     private Date updateTime;

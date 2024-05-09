@@ -1,35 +1,28 @@
 package rain.mocking.binarytea.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import rain.mocking.binarytea.controller.request.NewOrderForm;
 import rain.mocking.binarytea.controller.request.StatusForm;
-import rain.mocking.binarytea.model.MenuItem;
+import rain.mocking.binarytea.model.Menu;
 import rain.mocking.binarytea.model.Order;
 import rain.mocking.binarytea.model.OrderStatus;
 import rain.mocking.binarytea.service.MenuService;
 import rain.mocking.binarytea.service.OrderService;
 
-import javax.validation.Valid;
-import java.net.URI;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-@Controller
+@RestController
 @RequestMapping("/order")
 @Slf4j
 @RequiredArgsConstructor
@@ -37,7 +30,11 @@ public class OrderController {
   private final OrderService orderService;
   private final MenuService menuService;
 
-  @ResponseBody
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Order> listOrders() {
+    return orderService.getAllOrders();
+  }
+
   @GetMapping("/{id}")
   @SentinelResource("query-order")
   public ResponseEntity<Order> queryOneOrder(@PathVariable("id") Long id) {
@@ -45,42 +42,6 @@ public class OrderController {
     return result.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
   }
 
-  @ModelAttribute("items")
-  public List<MenuItem> items() {
-    return menuService.getAllMenu();
-  }
-
-  @GetMapping
-  public ModelAndView orderPage() {
-    return new ModelAndView("order")
-        .addObject(new NewOrderForm())
-        .addObject("orders", orderService.getAllOrders());
-  }
-
-  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  @ResponseBody
-  public List<Order> listOrders() {
-    return orderService.getAllOrders();
-  }
-
-  @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-  public String createNewOrder(
-      @Valid NewOrderForm form,
-      BindingResult result,
-      ModelMap modelMap,
-      RedirectAttributes redirectAttributes) {
-    if (result.hasErrors()) {
-      modelMap.addAttribute("orders", orderService.getAllOrders());
-      return "order";
-    }
-    createOrder(form);
-    modelMap.addAttribute("orders", orderService.getAllOrders());
-    redirectAttributes.addFlashAttribute("message", "订单创建成功");
-    // 重定向到订单页面
-    return "redirect:/order";
-  }
-
-  @ResponseBody
   @PostMapping(
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
@@ -89,13 +50,17 @@ public class OrderController {
     if (result.hasErrors()) {
       return ResponseEntity.badRequest().body(null);
     }
-    Order order = createOrder(form);
-    URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().build().toUri();
-    return ResponseEntity.created(uri).body(order);
+    List<Menu> itemList =
+        form.getItemIdList().stream()
+            .map(NumberUtils::toLong)
+            .collect(Collectors.collectingAndThen(Collectors.toList(), menuService::getByIdList));
+    Order order = orderService.createOrder(itemList, form.getDiscount());
+    log.info("创建新订单，Order={}", order);
+    return ResponseEntity.ok(order);
   }
 
   @PutMapping
-  public String modifyOrdersToPaid(@RequestParam("id") String id, ModelMap modelMap) {
+  public ResponseEntity<Integer> modifyOrdersToPaid(@RequestParam("id") String id) {
     int successCount = 0;
     if (StringUtils.isNotBlank(id)) {
       List<Long> orderIdList =
@@ -105,14 +70,11 @@ public class OrderController {
               .collect(Collectors.toList());
       successCount =
           orderService.modifyOrdersState(orderIdList, OrderStatus.ORDERED, OrderStatus.PAID);
+      return ResponseEntity.ok(successCount);
     }
-    modelMap.addAttribute(new NewOrderForm());
-    modelMap.addAttribute("success_count", successCount);
-    modelMap.addAttribute("orders", orderService.getAllOrders());
-    return "order";
+    return ResponseEntity.badRequest().body(null);
   }
 
-  @ResponseBody
   @PutMapping(
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
@@ -131,13 +93,4 @@ public class OrderController {
     return order == null ? ResponseEntity.badRequest().body(null) : ResponseEntity.ok(order);
   }
 
-  private Order createOrder(NewOrderForm form) {
-    List<MenuItem> itemList =
-        form.getItemIdList().stream()
-            .map(NumberUtils::toLong)
-            .collect(Collectors.collectingAndThen(Collectors.toList(), menuService::getByIdList));
-    Order order = orderService.createOrder(itemList, form.getDiscount());
-    log.info("创建新订单，Order={}", order);
-    return order;
-  }
 }

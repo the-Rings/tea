@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 @Aspect
 @Slf4j
 @Order(0)
-@Component
+// @Component
 public class RetryAspect {
   private static final int THRESHOLD = 3;
   private static final int DURATION = 100;
