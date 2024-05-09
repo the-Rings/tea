@@ -9,11 +9,9 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class MenuItem {
+public class MenuVo {
   private Long id;
   private String name;
   private String size;
   private Long price;
-  private Date createTime;
-  private Date updateTime;
 }

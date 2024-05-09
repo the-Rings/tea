@@ -99,7 +99,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="order : ${orders}">
+            <tr th:each="order : ${orderVos}">
                 <td><input name="id" type="checkbox" th:value="${order.id}" value="1"/></td>
                 <td th:text="${order.id}">1</td>
                 <td th:text="${order.amount.totalAmount}">CNY 12.0</td>

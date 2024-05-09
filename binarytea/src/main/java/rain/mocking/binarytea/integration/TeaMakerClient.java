@@ -18,15 +18,11 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 @RequiredArgsConstructor
 public class TeaMakerClient {
-  private final RestTemplate restTemplate;
-
-  @Value("${tea-maker.url}")
-  private String teaMakerUrl;
+  private final FeignTeaMakerService teaMakerService;
 
   @SentinelResource(value = "tea-maker", blockHandler = "notFinished")
   public TeaMakerResult makeTea(Long id) {
-    ResponseEntity<TeaMakerResult> entity =
-        restTemplate.postForEntity(teaMakerUrl + "/order/{id}", null, TeaMakerResult.class, id);
+    ResponseEntity<TeaMakerResult> entity = teaMakerService.makerProcess(id);
     log.info("请求TeaMaker， 响应码：{}", entity.getStatusCode());
     if (HttpStatus.BAD_REQUEST == entity.getStatusCode()) {
       return null;

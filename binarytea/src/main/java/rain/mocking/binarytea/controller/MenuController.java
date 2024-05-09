@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import rain.mocking.binarytea.controller.request.NewMenuItemForm;
-import rain.mocking.binarytea.model.MenuItem;
+import rain.mocking.binarytea.model.Menu;
 import rain.mocking.binarytea.model.Size;
 import rain.mocking.binarytea.service.MenuService;
 
@@ -34,61 +34,61 @@ import java.util.stream.Collectors;
 public class MenuController {
   private final MenuService menuService;
 
+  @GetMapping(params = "!name")
+  public List<Menu> listMenus() {
+    return menuService.getAllMenu();
+  }
+
+  @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Optional<Menu> detailMenu(@PathVariable Long id) {
+    return menuService.getById(id);
+  }
+
+  @RequestMapping(params = "name", method = RequestMethod.GET)
+  public List<Menu> listMenusByName(@RequestParam String name) {
+    return menuService.getByName(name);
+  }
+
   @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-  public Optional<MenuItem> createByForm(
+  public Optional<Menu> createByForm(
       @Valid NewMenuItemForm form, BindingResult result, HttpServletResponse response) {
     if (result.hasErrors()) {
       log.warn("绑定参数错误：{}", result.getAllErrors());
       response.setStatus(HttpStatus.BAD_REQUEST.value());
       return Optional.empty();
     }
-    MenuItem item =
-        MenuItem.builder().name(form.getName()).price(form.getPrice()).size(form.getSize()).build();
+    Menu item =
+        Menu.builder().name(form.getName()).price(form.getPrice()).size(form.getSize()).build();
     return menuService.save(item);
   }
 
   @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-  public ResponseEntity<List<MenuItem>> createBatch(@RequestParam("file") MultipartFile file) {
-    List<MenuItem> menuItemList = new ArrayList<>();
+  public ResponseEntity<List<Menu>> createBatch(@RequestParam("file") MultipartFile file) {
+    List<Menu> menuList = new ArrayList<>();
     URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().build().toUri();
     log.info("Current URI: {}", uri);
     if (file == null || file.isEmpty()) {
       log.warn("File can NOT be null or empty.");
-      return ResponseEntity.badRequest().body(menuItemList);
+      return ResponseEntity.badRequest().body(menuList);
     }
     try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-      menuItemList =
+      menuList =
           reader
               .lines()
               .map(StringUtils::split)
               .filter(f -> f != null && f.length == 3)
               .map(
                   f ->
-                      MenuItem.builder()
+                      Menu.builder()
                           .name(f[0])
                           .size(Size.valueOf(f[1]))
                           .price(Long.valueOf(f[2]))
                           .build())
               .collect(Collectors.toList());
-      return ResponseEntity.created(uri).body(menuService.save(menuItemList));
+      return ResponseEntity.created(uri).body(menuService.save(menuList));
     } catch (Exception e) {
       log.error("Exception occurred while creating menu list.", e);
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(menuItemList);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(menuList);
     }
-  }
-
-  @GetMapping(params = "!name")
-  public List<MenuItem> getAll() {
-    return menuService.getAllMenu();
-  }
-
-  @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Optional<MenuItem> getById(@PathVariable Long id) {
-    return menuService.getById(id);
-  }
-
-  @RequestMapping(params = "name", method = RequestMethod.GET)
-  public List<MenuItem> getByName(@RequestParam String name) {
-    return menuService.getByName(name);
   }
 }

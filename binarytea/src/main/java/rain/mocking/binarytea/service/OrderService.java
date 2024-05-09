@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import rain.mocking.BinaryTeaProperties;
 import rain.mocking.binarytea.model.Amount;
-import rain.mocking.binarytea.model.MenuItem;
+import rain.mocking.binarytea.model.Menu;
 import rain.mocking.binarytea.model.Order;
 import rain.mocking.binarytea.model.OrderStatus;
 import rain.mocking.binarytea.repository.OrderRepository;
@@ -26,9 +26,10 @@ public class OrderService {
     return orderRepository.findAll();
   }
 
-  public Order createOrder(List<MenuItem> itemList, int discount) {
+  @Transactional
+  public Order createOrder(List<Menu> itemList, int discount) {
     int newDiscount = discount == 100 ? binaryTeaProperties.getDiscount() : discount;
-    long total = itemList.stream().mapToLong(MenuItem::getPrice).sum();
+    long total = itemList.stream().mapToLong(Menu::getPrice).sum();
     Long pay = total * (newDiscount / 10L);
 
     Amount amount =
@@ -38,6 +39,7 @@ public class OrderService {
     return orderRepository.save(order);
   }
 
+  @Transactional
   public Order modifyOrderStatus(Long id, OrderStatus status) {
     Optional<Order> order = orderRepository.findById(id);
     if (order.isEmpty()) {
