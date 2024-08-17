@@ -11,14 +11,14 @@ import rain.mocking.binarytea.model.Order;
 import rain.mocking.binarytea.model.OrderStatus;
 import rain.mocking.binarytea.repository.OrderRepository;
 
-@Component
 @Slf4j
+// @Component
 @RequiredArgsConstructor
 public class TeaMakerNotifier {
   private final OrderRepository orderRepository;
   private final TeaMakerClient teaMakerClient;
 
-  @Scheduled(fixedDelay = 2000)
+  // @Scheduled(fixedDelay = 2000)
   public void notifyTeaMaker() {
     // 没考虑并发执行的问题
     List<Order> orders = orderRepository.findByStatusEquals(OrderStatus.PAID);

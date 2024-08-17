@@ -1,6 +1,11 @@
 package rain.mocking.teamaker.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
 import rain.mocking.teamaker.model.TeaMaker;
+import rain.mocking.teamaker.repository.mapper.TeaMakerMapper;
 
-public interface TeaMakerRepository extends JpaRepository<TeaMaker, Long> {}
+@Service
+public class TeaMakerRepository extends ServiceImpl<TeaMakerMapper, TeaMaker>
+    implements IService<TeaMaker> {}

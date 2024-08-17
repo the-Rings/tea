@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="rain.mocking.teamaker.repository.mapper.SequenceSegmentMapper">
+    <select id="selectOneByBizSegment" resultType="rain.mocking.teamaker.model.SequenceSegment">
+        SELECT id, biz_name, segment_name, current_value, step, record_version
+        FROM maker.t_sequence_segment
+        WHERE biz_name = #{biz_name}
+            AND segment_name = #{segment_name}
+        FOR UPDATE
+    </select>
+
+    <update id="updateVersionPlus">
+        UPDATE maker.t_sequence_segment
+        SET current_value = current_value + step,
+            record_version = record_version + 1
+        WHERE id = #{id}
+            AND biz_name = #{biz_name}
+            AND segment_name = #{segment_name}
+            AND record_version = #{record_version}
+    </update>
+
+</mapper>

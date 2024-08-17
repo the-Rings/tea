@@ -36,7 +36,6 @@ public class OrderController {
   }
 
   @GetMapping("/{id}")
-  @SentinelResource("query-order")
   public ResponseEntity<Order> queryOneOrder(@PathVariable("id") Long id) {
     Optional<Order> result = orderService.queryOrder(id);
     return result.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
