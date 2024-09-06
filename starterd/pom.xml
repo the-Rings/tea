@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>rain.mocking.tea-starter</groupId>
-    <artifactId>tea-spring-boot-starter</artifactId>
+    <groupId>rain.mocking.starterd</groupId>
+    <artifactId>starterd</artifactId>
     <version>1.0.0</version>
     <description>Tea项目共同依赖</description>
 

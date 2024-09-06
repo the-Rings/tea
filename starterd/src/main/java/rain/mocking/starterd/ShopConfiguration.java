@@ -1,4 +1,4 @@
-package org.tea.boot;
+package rain.mocking.starterd;
 
 import lombok.Data;
 import org.springframework.context.annotation.Configuration;

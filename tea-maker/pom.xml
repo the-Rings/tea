@@ -22,8 +22,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>rain.mocking.tea-starter</groupId>
-            <artifactId>tea-spring-boot-starter</artifactId>
+            <groupId>rain.mocking.starterd</groupId>
+            <artifactId>starterd</artifactId>
             <version>1.0.0</version>
         </dependency>
 
