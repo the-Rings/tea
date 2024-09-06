@@ -16,8 +16,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "t_menu")
 public class Menu implements Serializable {
 
-  @Serial
-  private static final long serialVersionUID = 8585684450527309518L;
+  @Serial private static final long serialVersionUID = 8585684450527309518L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

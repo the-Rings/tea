@@ -1,10 +1,8 @@
 package rain.mocking.customer.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -42,7 +40,8 @@ public class CustomerController {
   }
 
   @PostMapping("/order")
-  public ResponseEntity<OrderVo> createNewOrder(@RequestParam("id") String items, @RequestParam("dis") Integer discount) {
+  public ResponseEntity<OrderVo> createNewOrder(
+      @RequestParam("id") String items, @RequestParam("dis") Integer discount) {
     if (StringUtils.isNoneBlank(items)) {
       NewOrderForm form = new NewOrderForm();
       form.setItemIdList(Arrays.stream(items.split(",")).collect(Collectors.toList()));

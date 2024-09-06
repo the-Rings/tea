@@ -1,5 +1,6 @@
 package rain.mocking.customer.integratoin;
 
+import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +12,6 @@ import rain.mocking.customer.model.NewOrderForm;
 import rain.mocking.customer.model.OrderVo;
 import rain.mocking.customer.model.StatusForm;
 
-import java.util.List;
-
 /**
  * @author mao
  * @date 2023/8/27
@@ -22,9 +21,13 @@ public interface FeignOrderService {
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   List<OrderVo> listOrders();
 
-  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
   ResponseEntity<OrderVo> createNewOrder(@RequestBody NewOrderForm form);
 
-  @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @PutMapping(
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
   ResponseEntity<OrderVo> modifyOrderStatus(@RequestBody StatusForm form);
 }

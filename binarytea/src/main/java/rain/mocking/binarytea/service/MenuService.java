@@ -1,17 +1,15 @@
 package rain.mocking.binarytea.service;
 
+import java.util.List;
+import java.util.Optional;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import rain.mocking.binarytea.model.Menu;
-import rain.mocking.binarytea.model.Size;
 import rain.mocking.binarytea.repository.MenuRepository;
-
-import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -43,5 +41,4 @@ public class MenuService {
   public List<Menu> getByIdList(List<Long> idList) {
     return menuRepository.findAllById(idList);
   }
-
 }

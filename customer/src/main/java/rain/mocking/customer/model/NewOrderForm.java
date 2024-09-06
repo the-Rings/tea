@@ -1,8 +1,7 @@
 package rain.mocking.customer.model;
 
-import lombok.*;
-
 import java.util.List;
+import lombok.*;
 
 @Getter
 @Setter

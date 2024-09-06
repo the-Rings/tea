@@ -1,6 +1,5 @@
 package rain.mocking.binarytea.controller;
 
-import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -91,5 +90,4 @@ public class OrderController {
     Order order = orderService.modifyOrderStatus(form.getId(), status);
     return order == null ? ResponseEntity.badRequest().body(null) : ResponseEntity.ok(order);
   }
-
 }

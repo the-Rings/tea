@@ -3,7 +3,6 @@ package rain.mocking.binarytea.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-
 @Getter
 @AllArgsConstructor
 public enum OrderStatus {
@@ -13,5 +12,4 @@ public enum OrderStatus {
   FINISHED(3),
   TAKEN(4);
   private final int index;
-
 }

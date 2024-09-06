@@ -17,10 +17,9 @@ import rain.mocking.binarytea.controller.response.SequenceResponse;
 @Service
 @RequiredArgsConstructor
 public class TeaMakerClient {
-  private final FeignTeaMakerService teaMakerService;
-
   private static final String FEIGN_SEQUENCE_SENTINEL = "FEIGN_SEQUENCE_SENTINEL";
   private static final String MAKE_TEA_SENTINEL = "MAKE_TEA_SENTINEL";
+  private final FeignTeaMakerService teaMakerService;
 
   /**
    * 熔断配置详情（可以在Sentinel控制台操作） { "resource": "MAKE_TEA_SENTINEL", "grade": 2, "count": 3,
@@ -49,7 +48,7 @@ public class TeaMakerClient {
       blockHandler = "getSegmentNextBlockHandle",
       fallback = "getSegmentNextFallback")
   public SequenceResponse getSegmentNext() {
-    ResponseEntity<Long> entity = teaMakerService.sequenceSegmentNext("tea-maker", "making");
+    ResponseEntity<Long> entity = teaMakerService.sequenceSegmentNext("maker", "making");
     if (HttpStatus.OK != entity.getStatusCode()) {
       return SequenceResponse.builder().tip("上游服务状态异常：" + entity.getStatusCode()).build();
     }

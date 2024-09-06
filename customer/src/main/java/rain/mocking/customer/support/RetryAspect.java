@@ -1,13 +1,11 @@
 package rain.mocking.customer.support;
 
+import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author mao
@@ -22,13 +20,13 @@ public class RetryAspect {
   private static final int DURATION = 100;
 
   @Around("execution(* rain.mocking.customer.integratoin..*(..))")
-  public Object doWithRetry(ProceedingJoinPoint jp) throws Throwable{
+  public Object doWithRetry(ProceedingJoinPoint jp) throws Throwable {
     String signature = jp.getSignature().toLongString();
     log.info("带重试机制调用{}方法", signature);
     Object ret;
     Exception lastEx = null;
     for (int i = 0; i < THRESHOLD; i++) {
-      try{
+      try {
         ret = jp.proceed();
         log.info("在第{}次完成{}调用", i, signature);
         return ret;

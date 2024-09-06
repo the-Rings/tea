@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TeaMakerResult {
-    private boolean finish;
-    private long orderId;
-    private long teaMakerId;
+  private boolean finish;
+  private long orderId;
+  private long teaMakerId;
 }

@@ -10,6 +10,6 @@ import lombok.Getter;
 @Builder
 @Getter
 public class SequenceResponse {
-    private String tip;
-    private Long id;
+  private String tip;
+  private Long id;
 }

@@ -1,20 +1,17 @@
 package rain.mocking.customer.startup;
 
+import java.util.List;
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import rain.mocking.customer.integratoin.FeignOrderService;
 import rain.mocking.customer.model.NewOrderForm;
 import rain.mocking.customer.model.OrderVo;
 import rain.mocking.customer.model.StatusForm;
-
-import java.util.List;
-import java.util.Objects;
 
 @Slf4j
 // @Order(5)
@@ -22,7 +19,7 @@ import java.util.Objects;
 // @Component
 @RequiredArgsConstructor
 public class OrderRunner implements ApplicationRunner {
-    private final FeignOrderService feignOrderService;
+  private final FeignOrderService feignOrderService;
 
   @Override
   public void run(ApplicationArguments args) {

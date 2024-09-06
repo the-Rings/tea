@@ -1,9 +1,9 @@
 package rain.mocking.customer.startup;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,8 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.NumberUtils;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
 
 /**
  * @author mao

@@ -1,11 +1,10 @@
 package rain.mocking.customer.integratoin;
 
+import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import rain.mocking.customer.model.MenuVo;
-
-import java.util.List;
 
 /**
  * @author mao
@@ -13,6 +12,6 @@ import java.util.List;
  */
 @FeignClient(contextId = "menuService", name = "binarytea", path = "/menu")
 public interface FeignMenuService {
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    List<MenuVo> listMenus();
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  List<MenuVo> listMenus();
 }
