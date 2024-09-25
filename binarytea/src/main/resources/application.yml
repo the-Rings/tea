@@ -1,0 +1,41 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: binarytea
+
+  thymeleaf:
+    cache: false
+
+  web:
+    resource:
+      cache:
+        cachecontrol:
+          max-age: 60
+          cache-public: true
+  # Nacos, Sentinel
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.1.100:8848
+    sentinel:
+      transport:
+        dashboard: 192.168.66.100:9090
+        port: 8719
+  # DB
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.66.100:3306/binarytea
+      username: root
+      password: root
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  web:
+    exposure:
+      include: health,info,shop,metrics,refresh,env
+

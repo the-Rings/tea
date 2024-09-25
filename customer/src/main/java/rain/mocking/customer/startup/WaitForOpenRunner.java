@@ -31,7 +31,8 @@ public class WaitForOpenRunner implements ApplicationRunner, ApplicationContextA
   public void run(ApplicationArguments args) throws Exception {
     log.info("这里演示了@order用法，如果有多个类实现了ApplicationRunner，那么它们就是同一种类型，Order在这个小范围内按照顺序执行");
     log.info("执行ApplicationRunner order=2");
-    boolean flag = isOpen(); // 开门了么？
+    // boolean flag = isOpen(); // 开门了么？
+    boolean flag = true; // 开门了么？
     flag = flag || (waitForOpen(args) && isOpen()); // 没开门，想等一下再看看
     if (!flag) { // 没开门就退出
       log.info("店没开门，走了");

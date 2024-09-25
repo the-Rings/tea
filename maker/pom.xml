@@ -106,7 +106,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.7.6</version>
                 <configuration>
-                    <mainClass>rain.mocking.CustomerApplication</mainClass>
+                    <mainClass>rain.mocking.teamaker.TeaMakerApplication</mainClass>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>

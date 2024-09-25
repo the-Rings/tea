@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maker
+  namespace: tea
+  labels:
+    app: maker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: maker
+  template:
+    metadata:
+      labels:
+        app: maker
+    spec:
+      containers:
+        - name: maker
+          image: 192.168.66.10:5000/maker:v1.0
+          ports:
+            - containerPort: 8082
+          env:
+          - name: TZ
+            value: "Asia/Shanghai"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: maker
+  namespace: tea
+spec:
+  type: ClusterIP
+  selector:
+    app: maker
+  ports:
+    - port: 8082
+      targetPort: 8082
