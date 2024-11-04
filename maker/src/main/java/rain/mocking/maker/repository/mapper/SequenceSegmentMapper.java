@@ -1,9 +1,9 @@
-package rain.mocking.teamaker.repository.mapper;
+package rain.mocking.maker.repository.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import rain.mocking.teamaker.model.SequenceSegment;
+import rain.mocking.maker.model.SequenceSegment;
 
 @Mapper
 public interface SequenceSegmentMapper extends BaseMapper<SequenceSegment> {

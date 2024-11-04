@@ -1,4 +1,4 @@
-package rain.mocking.teamaker.util;
+package rain.mocking.maker.util;
 
 /**
  * @author mao

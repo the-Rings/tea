@@ -1,11 +1,10 @@
-package rain.mocking.teamaker;
+package rain.mocking.maker.service;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-import rain.mocking.teamaker.service.SequenceService;
 
 /**
  * @author mao
@@ -13,7 +12,7 @@ import rain.mocking.teamaker.service.SequenceService;
  */
 @Component
 @RequiredArgsConstructor
-public class TeaMakerRunner implements ApplicationRunner {
+public class MakerRunner implements ApplicationRunner {
   private final SequenceService sequenceService;
 
   @Override

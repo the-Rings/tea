@@ -1,4 +1,4 @@
-package rain.mocking.teamaker.model;
+package rain.mocking.maker.model;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -25,10 +25,10 @@
             <version>1.0.0</version>
         </dependency>
 
-        <!-- Nacos -->
+        <!-- Consul -->
         <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+          <groupId>org.springframework.cloud</groupId>
+          <artifactId>spring-cloud-starter-consul-discovery</artifactId>
         </dependency>
 
         <!-- OpenFeign -->

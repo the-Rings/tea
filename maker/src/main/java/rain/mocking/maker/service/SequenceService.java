@@ -1,4 +1,4 @@
-package rain.mocking.teamaker.service;
+package rain.mocking.maker.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import rain.mocking.teamaker.model.SequenceSegment;
-import rain.mocking.teamaker.repository.SequenceSegmentRepository;
+import rain.mocking.maker.model.SequenceSegment;
+import rain.mocking.maker.repository.SequenceSegmentRepository;
 
 /**
  * @author mao

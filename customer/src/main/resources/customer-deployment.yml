@@ -23,7 +23,15 @@ spec:
           env:
           - name: TZ
             value: "Asia/Shanghai"
-
+          - name: JAVA_TOOL_OPTIONS
+            value: "-javaagent:/opt/skywalking/agent/skywalking-agent.jar -Dskywalking.agent.service_name=customer -Dskywalking.collector.backend_service=192.168.66.100:11800"
+          volumeMounts:
+          - name: skywalking-agent
+            mountPath: /opt/skywalking/agent
+      volumes:
+      - name: skywalking-agent
+        hostPath:
+          path: /opt/skywalking/agent
 ---
 apiVersion: v1
 kind: Service

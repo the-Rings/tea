@@ -1,11 +1,11 @@
-package rain.mocking.teamaker.controller;
+package rain.mocking.maker.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import rain.mocking.teamaker.service.SequenceService;
-import rain.mocking.teamaker.util.SnowflakeIdGenerator;
+import rain.mocking.maker.service.SequenceService;
+import rain.mocking.maker.util.SnowflakeIdGenerator;
 
 /**
  * @author mao

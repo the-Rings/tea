@@ -1,10 +1,10 @@
-package rain.mocking.teamaker.service;
+package rain.mocking.maker.service;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import rain.mocking.teamaker.model.ProcessResult;
+import rain.mocking.maker.model.ProcessResult;
 
 @Service
 public class OrderService {

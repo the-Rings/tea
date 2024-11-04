@@ -1,4 +1,4 @@
-package rain.mocking.teamaker.model;
+package rain.mocking.maker.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

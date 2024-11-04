@@ -1,12 +1,12 @@
-package rain.mocking.teamaker;
+package rain.mocking.maker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TeaMakerApplication {
+public class MakerApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(TeaMakerApplication.class, args);
+    SpringApplication.run(MakerApplication.class, args);
   }
 }

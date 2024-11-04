@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="rain.mocking.teamaker.repository.mapper.SequenceSegmentMapper">
-    <select id="selectOneByBizSegment" resultType="rain.mocking.teamaker.model.SequenceSegment">
+    <select id="selectOneByBizSegment" resultType="rain.mocking.maker.model.SequenceSegment">
         SELECT id, biz_name, segment_name, current_value, step, record_version
         FROM maker.t_sequence_segment
         WHERE biz_name = #{biz_name}

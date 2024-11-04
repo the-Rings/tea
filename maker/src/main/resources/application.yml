@@ -1,0 +1,33 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: maker
+
+  cloud:
+    consul:
+      host: 192.168.66.100
+      port: 8500
+      discovery:
+        healthCheckPath: ${management.server.servlet.context-path}/actuator/health
+        serviceName: ${spring.application.name}
+
+    sentinel:
+      transport:
+        dashboard: 192.168.66.100:8090
+        port: 8719
+
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.1.100:3306/maker
+      username: root
+      password: root
+
+maker:
+  id: 1
+  time-per-order: 1s
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
