@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.stereotype.Component;
-import rain.mocking.BinaryTeaProperties;
+import rain.mocking.binarytea.config.BinaryTeaProperties;
 
 @Component
 @RequiredArgsConstructor

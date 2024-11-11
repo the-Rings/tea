@@ -16,6 +16,7 @@
         <spring-boot.version>2.6.13</spring-boot.version>
         <spring-cloud.version>2021.0.5</spring-cloud.version>
         <spring-cloud-alibaba-version>2021.0.5.0</spring-cloud-alibaba-version>
+        <kyro.verion>5.4.0</kyro.verion>
     </properties>
 
     <dependencies>
@@ -46,6 +47,13 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
+
+        <!-- Kryo -->
+        <dependency>
+            <groupId>com.esotericsoftware</groupId>
+            <artifactId>kryo</artifactId>
+            <version>${kyro.verion}</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>

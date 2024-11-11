@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.stereotype.Component;
-import rain.mocking.BinaryTeaProperties;
+import rain.mocking.binarytea.config.BinaryTeaProperties;
 
 @Component
 @Endpoint(id = "shop")

@@ -14,14 +14,17 @@ spring:
         cachecontrol:
           max-age: 60
           cache-public: true
-  # Nacos, Sentinel
+  # Consul, Sentinel
   cloud:
-    nacos:
+    consul:
+      host: 192.168.66.100
+      port: 8500
       discovery:
-        server-addr: 192.168.1.100:8848
+        healthCheckPath: ${management.server.servlet.context-path}/actuator/health
+        serviceName: ${spring.application.name}
     sentinel:
       transport:
-        dashboard: 192.168.66.100:9090
+        dashboard: 192.168.66.100:8090
         port: 8719
   # DB
   datasource:
@@ -39,3 +42,4 @@ management:
     exposure:
       include: health,info,shop,metrics,refresh,env
 
+# -javaagent:D:\PROJECTS\skywalking-agent\skywalking-agent.jar -Dskywalking.agent.service_name=binarytea -Dskywalking.collector.backend_service=192.168.66.100:11800

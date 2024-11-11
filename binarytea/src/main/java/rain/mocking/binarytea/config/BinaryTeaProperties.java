@@ -1,4 +1,4 @@
-package rain.mocking;
+package rain.mocking.binarytea.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -1,10 +1,13 @@
-package rain.mocking;
+package rain.mocking.customer;
 
 import java.time.Duration;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +17,9 @@ import org.springframework.web.client.RestTemplate;
  * @author mao
  * @date 2023/8/26
  */
+@Slf4j
 @EnableFeignClients
+@ConfigurationPropertiesScan
 @SpringBootApplication
 public class CustomerApplication {
   public static void main(String[] args) {

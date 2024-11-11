@@ -1,4 +1,4 @@
-package rain.mocking;
+package rain.mocking.binarytea;
 
 import java.time.Duration;
 import lombok.extern.slf4j.Slf4j;

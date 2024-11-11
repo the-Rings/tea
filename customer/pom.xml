@@ -16,6 +16,7 @@
         <spring-boot.version>2.6.13</spring-boot.version>
         <spring-cloud.version>2021.0.5</spring-cloud.version>
         <spring-cloud-alibaba-version>2021.0.5.0</spring-cloud-alibaba-version>
+        <mybatis-plus.version>3.5.2</mybatis-plus.version>
     </properties>
 
     <dependencies>
@@ -95,7 +96,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.7.6</version>
                 <configuration>
-                    <mainClass>rain.mocking.CustomerApplication</mainClass>
+                    <mainClass>rain.mocking.customer.CustomerApplication</mainClass>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>

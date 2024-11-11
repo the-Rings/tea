@@ -6,7 +6,7 @@ import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import rain.mocking.BinaryTeaProperties;
+import rain.mocking.binarytea.config.BinaryTeaProperties;
 import rain.mocking.binarytea.model.Amount;
 import rain.mocking.binarytea.model.Menu;
 import rain.mocking.binarytea.model.Order;
